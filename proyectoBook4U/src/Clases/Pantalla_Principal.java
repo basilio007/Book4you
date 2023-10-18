@@ -56,7 +56,7 @@ public class Pantalla_Principal extends JFrame{
 		
 		Font font1 = new Font("Verdana", Font.TYPE1_FONT, 20);
 		label1.setFont(font1);
-		label1.setBounds(365, 5, 500, 60);
+		label1.setBounds(360, 5, 500, 60);
 		add(label1);
 		setTitle("Book4You");
 		
