@@ -52,7 +52,7 @@ public class Pantalla_Principal extends JFrame{
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);//se cierra la ventana correctamente
 		
-		JLabel label1 = new JLabel("PANTALLA PRINCIPAL");
+		JLabel label1 = new JLabel("PANTALLA PRINCIPAL!!");
 		
 		Font font1 = new Font("Verdana", Font.TYPE1_FONT, 20);
 		label1.setFont(font1);
