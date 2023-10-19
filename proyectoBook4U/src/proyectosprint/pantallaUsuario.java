@@ -1,63 +1,41 @@
 package proyectosprint;
 
-import java.awt.*;
-
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class pantallaUsuario {
     public static void main(String[] args) {
-
         JFrame pagina = new JFrame("Página del Usuario");
         pagina.setSize(1080, 720);
         pagina.setLocationRelativeTo(null);
         pagina.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Panel de fondo
+        // Panel de fondo (verde oscuro)
         JPanel paneldeFondo = new JPanel();
-        paneldeFondo.setBackground(new Color(15,82,15,255));
+        paneldeFondo.setBackground(new Color(15, 82, 15, 255));
         
-        // Panel de adelante        
-        JPanel panelAdelante = new JPanel();
-        panelAdelante.setBackground(new Color(213,232,212,255));
-        
-        panelAdelante.setPreferredSize(new Dimension(600, 400));
-        
-     // Crear un LayeredPane
-        JLayeredPane layeredPane = new JLayeredPane();
 
-        // Agregar el panel de fondo (verde oscuro) en la capa inferior
-        layeredPane.add(paneldeFondo, JLayeredPane.DEFAULT_LAYER);
+        // Panel superior (que cumple la función de una barra de menú)
+        JPanel barraMenu = new JPanel(new BorderLayout());
+        barraMenu.setBackground(new Color(173, 255, 47)); // Color verde limón
+        barraMenu.setPreferredSize(new Dimension(1080, 40));
 
-        // Agregar el panel adelante en una capa superior
-        layeredPane.add(panelAdelante, JLayeredPane.PALETTE_LAYER);
+        // Icono
+        ImageIcon icono = new ImageIcon("C:\\Users\\alumnat\\Documents\\GitHub\\Book4you\\proyectoBook4U\\src\\proyectosprint\\casa.png");
+        icono = new ImageIcon(icono.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
+        JLabel iconoLabel = new JLabel(icono);
+        barraMenu.add(iconoLabel, BorderLayout.WEST);
 
-        // Agregar componentes a tu página de usuario
-        JLabel label = new JLabel();
-        paneldeFondo.add(label);
+        // Texto "Mi perfil"
+        JLabel labelTexto = new JLabel("Mi perfil");
+        labelTexto.setFont(new Font(labelTexto.getFont().getName(), Font.PLAIN, 24));
+        labelTexto.setHorizontalAlignment(SwingConstants.CENTER);
+        barraMenu.add(labelTexto, BorderLayout.CENTER);
 
-        // Barra de menú de clor verde limón
-        JMenuBar menuBarra = new JMenuBar();        
-        menuBarra.setOpaque(true);
-        menuBarra.setBackground(new Color(173, 255, 47));
-
-        ImageIcon icono = new ImageIcon("C:\\proyectosprint\\src\\proyectosprint\\casa.png"); // Reemplaza con la ruta de tu imagen
-        
-        
-     // Escalar el icono a un tamaño deseado
-        icono = new ImageIcon(icono.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)); // Ajusta el tamaño según tus necesidades
-
-        // Crear un elemento de menú personalizado con el icono
-        JMenuItem iconoItem = new JMenuItem(icono);
-        
-        // Agregar el icono a la izquierda de la barra de menú
-        menuBarra.add(Box.createRigidArea(new Dimension(10, 0))); // Espacio en blanco
-        menuBarra.add(iconoItem);
-        
-        // Configurar la barra de menú en el JFrame
-        pagina.setJMenuBar(menuBarra);
-
-        // Agregar el panel al JFrame
-        pagina.add(paneldeFondo);
+        // Agregar el panel superior y el panel de fondo al JFrame
+        pagina.add(barraMenu, BorderLayout.NORTH);
+        pagina.add(paneldeFondo, BorderLayout.CENTER);
 
         // Asegurarse de que el JFrame sea visible
         pagina.setVisible(true);
