@@ -11,7 +11,7 @@ public class Login {
     private BufferedImage image;
 
     public Login() {
-        // Crear una nueva ventana (JFrame) con el t�tulo "Login" y establecer su tama�o y operaci�n de cierre.
+        // Crear una nueva ventana (JFrame) con el título "Login" y establecer su tamaño y operación de cierre.
         frame = new JFrame("Login");
         frame.setSize(1080, 720);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,18 +24,22 @@ public class Login {
         panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
+                super.paintComponent(g); // Llamada a super.paintComponent(g)
+
                 /*
-                 * Creaci�n de un rect�ngulo vertical con x = 450px, y = 550px
-                 * Dibuja un rect�ngulo en el centro del panel
+                 * Creación de un rectángulo vertical con x = 450px, y = 550px
+                 * Dibuja un rectángulo en el centro del panel
                  */
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.insets = new Insets(10, 10, 10, 10);
+                
                 int width = 450;
                 int height = 550;
                 int x = (getWidth() - width) / 2;
                 int y = (getHeight() - height) / 2;
-                g.setColor(Color.BLACK); // Color del borde del rect�ngulo
+                g.setColor(Color.BLACK); // Color del borde del rectángulo
                 g.drawRect(x, y, width, height);
-                g.setColor(backgroundColor2); // Color del relleno del rect�ngulo
+                g.setColor(backgroundColor2); // Color del relleno del rectángulo
                 g.fillRect(x, y, width, height);
 
                 // Cargar una imagen
@@ -45,13 +49,20 @@ public class Login {
                     e.printStackTrace();
                 }
 
-                // Dibujar la imagen m�s peque�a en la parte superior del rect�ngulo blanco
+                // Dibujar la imagen más pequeña en la parte superior del rectángulo blanco
                 if (image != null) {
                     int imgWidth = 100;  // Ancho deseado de la imagen
                     int imgHeight = (image.getHeight() * imgWidth) / image.getWidth();  // Calcula la altura proporcional
                     int imgX = x + (width - imgWidth) / 2;  // Centra horizontalmente
-                    int imgY = y + 10;  // Distancia desde la parte superior del rect�ngulo
+                    int imgY = y + 10;  // Distancia desde la parte superior del rectángulo
                     g.drawImage(image, imgX, imgY, imgWidth, imgHeight, this);
+               // Agregar el texto "Iniciar sesión" debajo de la imagen
+                    g.setColor(Color.BLACK);
+                    g.setFont(new Font("Arial", Font.PLAIN, 18));
+                    String text = "Iniciar sesión";
+                    int textX = x + (width - g.getFontMetrics().stringWidth(text)) / 2;
+                    int textY = imgY + imgHeight + 20;  // 20 píxeles de separación desde la imagen
+                    g.drawString(text, textX, textY);                                   
                 }
             }
         };
@@ -63,7 +74,7 @@ public class Login {
     }
 
     public static void main(String[] args) {
-        // Crear una instancia de la clase Login y mostrar la imagen en el rect�ngulo blanco.
+        // Crear una instancia de la clase Login y mostrar la imagen, texto, botón y campo de entrada.
         SwingUtilities.invokeLater(Login::new);
     }
 }
