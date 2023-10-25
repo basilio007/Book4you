@@ -41,6 +41,56 @@ public class pantallaUsuario {
         JLabel usuarioLabel = new JLabel(usuarioIcono);
         panelInferior.add(usuarioLabel, BorderLayout.WEST);
 
+        // Panel para campos de entrada
+        JPanel panelCampos = new JPanel(new GridLayout(5, 3)); // 5 filas y 3 columnas
+        panelCampos.setBackground(new Color(255, 255, 255)); // Color blanco (puedes cambiarlo a tu preferencia)
+
+        // Tamaño de los campos de entrada
+        Dimension campoDimension = new Dimension(200, 20); // Tamaño personalizado
+
+        // Agregar campos de entrada y ajustar su tamaño
+        JTextField NombreCampo = new JTextField();
+        NombreCampo.setPreferredSize(campoDimension);
+        JTextField ApellidosCampo = new JTextField();
+        ApellidosCampo.setPreferredSize(campoDimension);
+        JTextField DNICampo = new JTextField();
+        DNICampo.setPreferredSize(campoDimension);
+        JTextField DomicilioCampo = new JTextField();
+        DomicilioCampo.setPreferredSize(campoDimension);
+        JTextField ContraseñaCampo = new JTextField();
+        ContraseñaCampo.setPreferredSize(campoDimension);
+
+        // Etiquetas para los campos con fuente más pequeña
+        Font fuenteEtiqueta = new Font("Arial", Font.PLAIN, 16); // Tamaño de fuente para las etiquetas
+        JLabel NombreTexto = new JLabel("Nombre:");
+        NombreTexto.setFont(fuenteEtiqueta);
+        JLabel ApellidosTexto = new JLabel("Apellidos:");
+        ApellidosTexto.setFont(fuenteEtiqueta);
+        JLabel DNITexto = new JLabel("DNI:");
+        DNITexto.setFont(fuenteEtiqueta);
+        JLabel DomicilioTexto = new JLabel("Domicilio:");
+        DomicilioTexto.setFont(fuenteEtiqueta);
+        JLabel ContraseñaTexto = new JLabel("Contraseña:");
+        ContraseñaTexto.setFont(fuenteEtiqueta);
+        
+        //Agregar los botones de editar
+        
+        JButton BotonEditar = new JButton("Editar");
+
+        // Agregar etiquetas y campos al panel de campos (uno debajo del otro)
+        panelCampos.add(NombreTexto);
+        panelCampos.add(NombreCampo);
+        panelCampos.add(ApellidosTexto);
+        panelCampos.add(ApellidosCampo);
+        panelCampos.add(DNITexto);
+        panelCampos.add(DNICampo);
+        panelCampos.add(DomicilioTexto);
+        panelCampos.add(DomicilioCampo);
+        panelCampos.add(ContraseñaTexto);
+        panelCampos.add(ContraseñaCampo);
+
+        panelInferior.add(panelCampos, BorderLayout.CENTER);
+
         // Agregar el panel superior y el panel inferior al JFrame
         pagina.add(barraMenu, BorderLayout.NORTH);
         pagina.add(panelInferior, BorderLayout.CENTER);
