@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class pantallaUsuario {
     public static void main(String[] args) {
@@ -61,48 +62,75 @@ public class pantallaUsuario {
         JTextField[] campos = new JTextField[5];
         JButton[] botonesEditar = new JButton[5];
 
-        for (int i = 0; i < 5; i++) {
-            campos[i] = new JTextField();
-            campos[i].setPreferredSize(campoDimension);
-            campos[i].setEditable(false);
+        try {
+            // Conectar a la base de datos Oracle
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "DW2_2324_BOOK4U_ESECODI", "AESECODI");
 
-            JLabel etiqueta = new JLabel();
-            switch (i) {
-                case 0:
-                    etiqueta.setText("Nombre:");
-                    break;
-                case 1:
-                    etiqueta.setText("Apellidos:");
-                    break;
-                case 2:
-                    etiqueta.setText("DNI:");
-                    break;
-                case 3:
-                    etiqueta.setText("Domicilio:");
-                    break;
-                case 4:
-                    etiqueta.setText("Contraseña:");
-                    break;
-            }
-            etiqueta.setFont(fuenteEtiqueta);
+            // Consulta para recuperar datos del usuario (reemplaza con tu consulta SQL)
+            String consulta = "SELECT nombre, apellidos, telefono, dni, contrasenya FROM usuario WHERE id_cliente = ?";
 
-            botonesEditar[i] = new JButton("Editar");
-            final int index = i;
-            botonesEditar[i].addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    campos[index].setEditable(true);
+            // Preparar la consulta
+            PreparedStatement preparedStatement = connection.prepareStatement(consulta);
+            // Asumiendo que tienes el ID del usuario, reemplaza el valor 1 con el ID correcto
+            preparedStatement.setInt(1, 1); // Cambia 1 por el ID de tu usuario
+
+            // Ejecutar la consulta
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Si se encuentra un registro, mostrar los datos en los campos de texto
+            if (resultSet.next()) {
+                for (int i = 0; i < 5; i++) {
+                    campos[i] = new JTextField(resultSet.getString(i + 1)); // Indices en ResultSet comienzan en 1
+                    campos[i].setPreferredSize(campoDimension);
+                    campos[i].setEditable(false);
+
+                    JLabel etiqueta = new JLabel();
+                    switch (i) {
+                        case 0:
+                            etiqueta.setText("Nombre:");
+                            break;
+                        case 1:
+                            etiqueta.setText("Apellidos:");
+                            break;
+                        case 2:
+                            etiqueta.setText("Teléfono:");
+                            break;
+                        case 3:
+                            etiqueta.setText("DNI:");
+                            break;
+                        case 4:
+                            etiqueta.setText("Contraseña:");
+                            break;
+                    }
+                    etiqueta.setFont(fuenteEtiqueta);
+
+                    botonesEditar[i] = new JButton("Editar");
+                    final int index = i;
+                    botonesEditar[i].addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            campos[index].setEditable(true);
+                        }
+                    });
+
+                    JPanel filaPanel = new JPanel(new BorderLayout());
+                    filaPanel.setBackground(new Color(255, 255, 255));
+
+                    filaPanel.add(etiqueta, BorderLayout.WEST);
+                    filaPanel.add(campos[index], BorderLayout.CENTER);
+                    filaPanel.add(botonesEditar[index], BorderLayout.EAST);
+                    panelCampos.add(filaPanel);
                 }
-            });
+            }
 
-            JPanel filaPanel = new JPanel(new BorderLayout());
-            filaPanel.setBackground(new Color(255, 255, 255));
-
-            filaPanel.add(etiqueta, BorderLayout.WEST);
-            filaPanel.add(campos[index], BorderLayout.CENTER);
-            filaPanel.add(botonesEditar[index], BorderLayout.EAST);
-            panelCampos.add(filaPanel);
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
+            
+        
+    
         panelInferior.add(panelCampos, BorderLayout.CENTER);
 
         // Panel de "Guardar cambios"
@@ -148,3 +176,4 @@ public class pantallaUsuario {
         pagina.setVisible(true);
     }
 }
+
