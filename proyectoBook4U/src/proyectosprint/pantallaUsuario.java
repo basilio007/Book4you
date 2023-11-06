@@ -60,7 +60,8 @@ public class pantallaUsuario {
 
         // Agregar campos de entrada, botones "Editar" y lógica de edición
         JTextField[] campos = new JTextField[5];
-        JButton[] botonesEditar = new JButton[5];
+        JToggleButton[] botonesEditar = new JToggleButton[5];
+        String[] valoresOriginales = new String[5];
 
         try {
             // Conectar a la base de datos Oracle
@@ -104,11 +105,20 @@ public class pantallaUsuario {
                     }
                     etiqueta.setFont(fuenteEtiqueta);
 
-                    botonesEditar[i] = new JButton("Editar");
+                    botonesEditar[i] = new JToggleButton("Editar");
+                    botonesEditar[i].setFont(fuenteEtiqueta);
                     final int index = i;
                     botonesEditar[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            campos[index].setEditable(true);
+                            if (botonesEditar[index].isSelected()) {
+                                botonesEditar[index].setText("Cancelar");
+                                valoresOriginales[index] = campos[index].getText(); // Guardar el valor original
+                                campos[index].setEditable(true);
+                            } else {
+                                botonesEditar[index].setText("Editar");
+                                campos[index].setText(valoresOriginales[index]); // Restaurar el valor original
+                                campos[index].setEditable(false);
+                            }
                         }
                     });
 
@@ -152,7 +162,55 @@ public class pantallaUsuario {
         JButton botonComprarCreditos = new JButton("Comprar créditos");
 
         // Botón "Guardar cambios"
+     // Botón "Guardar cambios"
         JButton botonGuardarCambios = new JButton("Guardar cambios");
+        botonGuardarCambios.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Lógica para actualizar la base de datos con los nuevos valores
+                try {
+                    Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "DW2_2324_BOOK4U_ESECODI", "AESECODI");
+                    for (int i = 0; i < 5; i++) {
+                        if (campos[i].isEditable()) {
+                            String nuevoValor = campos[i].getText();
+                            // Realizar la actualización en la base de datos
+                            String consulta = "UPDATE usuario SET ";
+                            switch (i) {
+                                case 0:
+                                    consulta += "nombre = ?";
+                                    break;
+                                case 1:
+                                    consulta += "apellidos = ?";
+                                    break;
+                                case 2:
+                                    consulta += "telefono = ?";
+                                    break;
+                                case 3:
+                                    consulta += "dni = ?";
+                                    break;
+                                case 4:
+                                    consulta += "contrasenya = ?";
+                                    break;
+                            }
+                            consulta += " WHERE id_cliente = ?";
+
+                            PreparedStatement preparedStatement = connection.prepareStatement(consulta);
+                            preparedStatement.setString(1, nuevoValor);
+                            preparedStatement.setInt(2, 1); // Cambia 1 por el ID de tu usuario
+                            preparedStatement.executeUpdate();
+                            preparedStatement.close();
+
+                            // Actualizar el campo de texto con el nuevo valor
+                            campos[i].setText(nuevoValor);
+                            campos[i].setEditable(false);
+                            botonesEditar[i].setText("Editar");
+                        }
+                    }
+                    connection.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         // Agregar elementos al panel de "Guardar cambios"
         JPanel panelIzquierdo = new JPanel(new FlowLayout(FlowLayout.LEFT));
