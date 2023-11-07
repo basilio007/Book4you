@@ -44,11 +44,14 @@ private void iniciarComponentes() {
 	panel1.add(etiqueta2);
 	
 	
+	 
+	
+	
 	JLabel Texto1 = new JLabel();
 	Texto1.setText("Pantalla Principal");
 	//Texto1.setForeground(Color.orange);//color teexto
 	Texto1.setBounds(335, 30, 400, 50);
-	Texto1.setFont(new Font("arial",Font.BOLD,40));
+	Texto1.setFont(new Font("georgia",Font.BOLD,35));
 	panel1.add(Texto1);
 	
 	
@@ -67,7 +70,7 @@ private void iniciarComponentes() {
 	Nuevas.setBackground(new Color(213,232,212,255));
 	//ImageIcon botonimagen = new ImageIcon("Pictures/back5.png");
 	//atras.setIcon(new ImageIcon(botonimagen.getImage().getScaledInstance(atras.getWidth(),atras.getHeight(),Image.SCALE_SMOOTH )));
-	this.getContentPane().add(Nuevas);
+	panel1.add(Nuevas);
 	Nuevas.setVisible(true);
 	
 	JButton Reservas=new JButton("Reservas");
@@ -75,7 +78,7 @@ private void iniciarComponentes() {
 	Reservas.setBackground(new Color(213,232,212,255));
 	//ImageIcon botonimagen = new ImageIcon("Pictures/back5.png");
 	//atras.setIcon(new ImageIcon(botonimagen.getImage().getScaledInstance(atras.getWidth(),atras.getHeight(),Image.SCALE_SMOOTH )));
-	this.getContentPane().add(Reservas);
+	panel1.add(Reservas);
 	Reservas.setVisible(true);
 	
 	JButton History=new JButton("Historial");
@@ -83,51 +86,132 @@ private void iniciarComponentes() {
 	History.setBackground(new Color(213,232,212,255));
 	//ImageIcon botonimagen = new ImageIcon("Pictures/back5.png");
 	//atras.setIcon(new ImageIcon(botonimagen.getImage().getScaledInstance(atras.getWidth(),atras.getHeight(),Image.SCALE_SMOOTH )));
-	this.getContentPane().add(History);
+	panel1.add(History);
 	History.setVisible(true);
-	
-	JButton Search=new JButton("Buscar");
-	Search.setBounds(60, 220, 100, 40);
-	Search.setBackground(new Color(213,232,212,255));
-	//ImageIcon botonimagen = new ImageIcon("Pictures/back5.png");
-	//atras.setIcon(new ImageIcon(botonimagen.getImage().getScaledInstance(atras.getWidth(),atras.getHeight(),Image.SCALE_SMOOTH )));
-	this.getContentPane().add(Search);
-	Search.setVisible(true);
-	
-	
 	
 	JButton nomUsusario=new JButton("Nombre del usuario");
 	nomUsusario.setBounds(670, 5, 280, 30);
-     this.getContentPane().add(nomUsusario);
+	panel1.add(nomUsusario);
+	panel1.add(nomUsusario);
      
-     nomUsusario.addActionListener(new ActionListener() {
+    /* nomUsusario.addActionListener(new ActionListener() {
     	 public void actionPerformed(ActionEvent arg0) {
     		 dispose();
     		 mi_perfil PERFIL = new mi_perfil();
     		 PERFIL.setVisible(true);
     	 }
     	 
-     });
-     
-     
-     
-     
+     });*/
+      
      JTextField numCredit=new JTextField();
      numCredit.setBounds(775, 45, 175, 21);
-     this.getContentPane().add(numCredit);
+     panel1.add(numCredit);
+     numCredit.setVisible(true);
      
-     JTextField barBusqueda=new JTextField();
-     barBusqueda.setBounds(180, 220, 200, 40);
-     this.getContentPane().add(barBusqueda);
-        
-	
 	
 	
 	JPanel panel2 = new JPanel();
 	panel2.setBackground(Color.white);
+	panel2.setLayout(null);
 	this.getContentPane().add(panel2);
 	
 	
+	JButton Search=new JButton("Buscar");
+	Search.setBounds(60, 220, 100, 40);
+	Search.setBackground(new Color(213,232,212,255));
+	//ImageIcon botonimagen = new ImageIcon("Pictures/back5.png");
+	//atras.setIcon(new ImageIcon(botonimagen.getImage().getScaledInstance(atras.getWidth(),atras.getHeight(),Image.SCALE_SMOOTH )));
+	panel2.add(Search);
+	Search.setVisible(true);
+	
+	JTextField barBusqueda=new JTextField();
+    barBusqueda.setBounds(180, 220, 200, 40);
+    barBusqueda.setText("introduce tu lugar de destino");
+    panel2.add(barBusqueda);
+    barBusqueda.setVisible(true);
+    
+    
+   
+    JLabel anuncio1 = new JLabel();
+	ImageIcon foto  = new ImageIcon("pictures/medplaya-hotel-regente.jpg"); 
+	anuncio1.setBounds(5, 300, 170, 150);
+	anuncio1.setIcon(new ImageIcon(foto.getImage().getScaledInstance(170, 150, Image.SCALE_SMOOTH)));
+	panel2.add(anuncio1);
+	anuncio1.setVisible(true);
+	
+	JLabel Textoanuncio1 = new JLabel();
+	Textoanuncio1.setText("Medplaya Hotel Regente 74€");
+	//Texto1.setForeground(Color.orange);//color teexto
+	Textoanuncio1.setBounds(205, 230, 270, 150);
+	Textoanuncio1.setFont(new Font("arial",Font.BOLD,20));
+	panel2.add(Textoanuncio1);
+	
+	
+	
+	 JLabel anuncio2 = new JLabel();
+		ImageIcon foto2  = new ImageIcon("pictures/port-benidorm-hotel-spa.jpg"); 
+		anuncio2.setBounds(5, 480, 170, 150);
+		anuncio2.setIcon(new ImageIcon(foto2.getImage().getScaledInstance(170, 150, Image.SCALE_SMOOTH)));
+		panel2.add(anuncio2);
+		anuncio2.setVisible(true);
+		
+		JLabel ddescripcnanuncio0 = new JLabel();
+		ddescripcnanuncio0.setText("Habitación Doble con balcón 2 camas");
+		//Texto1.setForeground(Color.orange);//color teexto
+		ddescripcnanuncio0.setBounds(205, 260, 270, 150);
+		ddescripcnanuncio0.setFont(new Font("arial",Font.BOLD,12));
+		panel2.add(ddescripcnanuncio0);
+		
+		JLabel descripcnanuncio00 = new JLabel();
+		descripcnanuncio00.setText("2 Camas Individuales");
+		//Texto1.setForeground(Color.orange);//color teexto
+		descripcnanuncio00.setBounds(205, 274, 270, 150);
+		descripcnanuncio00.setFont(new Font("arial",Font.BOLD,12));
+		panel2.add(descripcnanuncio00);
+		
+		JLabel descripcnanuncio000 = new JLabel();
+		descripcnanuncio000.setText("Desayuno incluido");
+		//Texto1.setForeground(Color.orange);//color teexto
+		descripcnanuncio000.setBounds(205, 289, 270, 150);
+		descripcnanuncio000.setFont(new Font("arial",Font.BOLD,12));
+		panel2.add(descripcnanuncio000);
+		
+		JLabel descripcnanuncio0000 = new JLabel();
+		descripcnanuncio0000.setText("a 2,4 km del centro cerca de la playa");
+		//Texto1.setForeground(Color.orange);//color teexto
+		descripcnanuncio0000.setBounds(205, 304, 270, 150);
+		descripcnanuncio0000.setFont(new Font("arial",Font.BOLD,12));
+		panel2.add(descripcnanuncio0000);
+		
+		/////////////////////////////
+	
+	JLabel Textoanuncio2 = new JLabel();
+	Textoanuncio2.setText("Port Benidorm hotel Spa 73€");
+	//Texto1.setForeground(Color.orange);//color teexto
+	Textoanuncio2.setBounds(205, 415, 275, 150);
+	Textoanuncio2.setFont(new Font("arial",Font.BOLD,20));
+	panel2.add(Textoanuncio2);
+	
+	JLabel ddescripcnanuncio1 = new JLabel();
+	ddescripcnanuncio1.setText("Habitación Doble (2 adultos)");
+	//Texto1.setForeground(Color.orange);//color teexto
+	ddescripcnanuncio1.setBounds(205, 440, 270, 150);
+	ddescripcnanuncio1.setFont(new Font("arial",Font.BOLD,12));
+	panel2.add(ddescripcnanuncio1);
+	
+	JLabel descripcnanuncio2 = new JLabel();
+	descripcnanuncio2.setText("2 Camas Individuales");
+	//Texto1.setForeground(Color.orange);//color teexto
+	descripcnanuncio2.setBounds(205, 454, 270, 150);
+	descripcnanuncio2.setFont(new Font("arial",Font.BOLD,12));
+	panel2.add(descripcnanuncio2);
+	
+	JLabel descripcnanuncio3 = new JLabel();
+	descripcnanuncio3.setText("Desayuno incluido");
+	//Texto1.setForeground(Color.orange);//color teexto
+	descripcnanuncio3.setBounds(205, 467, 270, 150);
+	descripcnanuncio3.setFont(new Font("arial",Font.BOLD,12));
+	panel2.add(descripcnanuncio3);
 	
 	
 	
